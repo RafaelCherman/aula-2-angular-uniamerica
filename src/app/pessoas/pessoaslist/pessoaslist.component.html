@@ -1,0 +1,22 @@
+<div class="col-2 offset-7 btn-group">
+  <input class="btn btn-success" type="button" value="Cadastrar novo" routerLink="/admin/pessoas/novo"/>
+</div>
+
+<table class="col-6 offset-3">
+    <thead>
+      <tr>
+        <th class="col-3" scope="col">Nome</th>
+        <th class="col-3" scope="col">Idade</th>
+        <th class="col-3" scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pessoa of lista; let i = index">
+        <td>{{ pessoa.nome }}</td>
+        <td>{{ pessoa.idade }}</td>
+        <td>
+          <input class="btn btn-warning" type="button" value="Editar" routerLink="/admin/pessoas/editar/{{ i }}" />
+        </td>
+      </tr>
+    </tbody>
+  </table>

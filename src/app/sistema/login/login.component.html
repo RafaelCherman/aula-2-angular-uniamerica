@@ -1,0 +1,17 @@
+<div class="col-6 offset-3">
+  <div>
+      <label for="usuario" class="col-form-label">Usuario</label>
+      <div>
+        <input type="text" class="form-control" id="usuario" [(ngModel)]="admin.usuario">
+      </div>
+    </div>
+    <div >
+      <label for="senha" class="col-2 col-form-label">Senha</label>
+      <div>
+        <input type="password" class="form-control" id="senha" [(ngModel)]="admin.senha">
+      </div>
+      <div class="col-3 offset-9 btn-group">
+          <input class="btn btn-primary" type="button" value="Entrar" (click)="logar()"/>
+        </div>
+  </div>
+</div>

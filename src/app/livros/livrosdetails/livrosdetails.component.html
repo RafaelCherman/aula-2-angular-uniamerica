@@ -1,0 +1,24 @@
+
+<div class="col-6 offset-3">
+<div>
+    <label for="titulo" class="col-form-label">Titulo</label>
+    <div>
+        <input type="text" class="form-control" id="titulo" [(ngModel)]="livro.titulo">
+      </div>
+  </div>
+  <div class="">
+    <label for="autor" class="col-form-label">Autor</label>
+    <div >
+      <input type="text" class="form-control" id="autor" [(ngModel)]="livro.autor">
+    </div>
+    <div class="col-3 offset-9 btn-group">
+        <input *ngIf="!editar" class="btn btn-success" type="button" value="Confirmar"/>
+        <input *ngIf="editar" class="btn btn-warning" type="button" value="Editar"/>
+      </div>
+      <div>
+        <p>{{ livro.titulo }}</p>
+        <p>{{ livro.autor }}</p>
+    </div>
+</div>
+</div>
+
