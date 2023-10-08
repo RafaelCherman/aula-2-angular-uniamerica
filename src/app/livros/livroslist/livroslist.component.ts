@@ -48,7 +48,7 @@ export class LivroslistComponent {
 
   alteraLista(livro: Livro)
   {
-    if(this.index < 1)
+    if(this.index < 0)
     {
       this.lista.push(livro);
     }

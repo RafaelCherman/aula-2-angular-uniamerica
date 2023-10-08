@@ -89,7 +89,7 @@ export class PessoaslistComponent {
 
   alteraLista(pessoa: Pessoa)
   {
-    if(this.index < 1)
+    if(this.index < 0)
     {
       this.lista.push(pessoa);
     }

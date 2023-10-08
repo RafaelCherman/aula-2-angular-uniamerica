@@ -48,7 +48,7 @@ export class CarroslistComponent {
 
   alteraLista(carro: Carro)
   {
-    if(this.index < 1)
+    if(this.index < 0)
     {
       this.lista.push(carro);
     }
