@@ -10,7 +10,6 @@ import { Usuario } from '../usuario';
 export class LoginComponent {
 
   roteador = inject(Router);
-
   admin: Usuario = new Usuario();
  
 

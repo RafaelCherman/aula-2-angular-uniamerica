@@ -1,5 +1,5 @@
 <div class="col-2 offset-7 btn-group">
-  <input class="btn btn-success" type="button" value="Cadastrar novo" routerLink="/admin/pessoas/novo"/>
+  <input class="btn btn-success" type="button" value="Cadastrar novo" (click)="abrirModal(content, -1)"/>
 </div>
 
 <table class="col-6 offset-3">
@@ -15,8 +15,24 @@
         <td>{{ pessoa.nome }}</td>
         <td>{{ pessoa.idade }}</td>
         <td>
-          <input class="btn btn-warning" type="button" value="Editar" routerLink="/admin/pessoas/editar/{{ i }}" />
+          <input class="btn btn-warning" type="button" value="Editar" (click)="abrirModal(content, i)"/>
         </td>
       </tr>
     </tbody>
   </table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 *ngIf="!editar" class="modal-title">Cadastrar Pessoa</h4>
+    <h4 *ngIf="editar" class="modal-title">Editar Pessoa</h4>
+    <button type="button" class="btn-close" aria-label="Close"
+    (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-pessoasdetails [editar]="editar" [pessoaRecibida]="pessoaEnviar" (retorno)="alteraLista($event)"></app-pessoasdetails>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light"
+    (click)="modal.close('Close click')">Fechar</button>
+  </div>
+</ng-template>

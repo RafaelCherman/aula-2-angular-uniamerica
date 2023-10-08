@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Pessoa } from '../pessoa';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pessoaslist',
@@ -9,6 +10,10 @@ import { Pessoa } from '../pessoa';
 export class PessoaslistComponent {
 
   lista: Pessoa[] = [];
+  index: number = -1;
+  editar: boolean = false; 
+  modalService = inject(NgbModal);
+  pessoaEnviar!: Pessoa;
 
   constructor()
   {
@@ -65,6 +70,34 @@ export class PessoaslistComponent {
 
   }
 
+  abrirModal(content: any, i: number)
+  {
+    this.index = -1;
+    this.pessoaEnviar = new Pessoa();
+    if(i < 0)
+    {
+      this.editar = false;
+    }
+    else
+    {
+      this.editar = true;
+      this.index = i;
+      this.pessoaEnviar = this.lista[i];
+    }
+    this.modalService.open(content, {size: 'lg'});
+  }
 
+  alteraLista(pessoa: Pessoa)
+  {
+    if(this.index < 1)
+    {
+      this.lista.push(pessoa);
+    }
+    else
+    {
+      this.lista[this.index] = pessoa;
+    }
+    this.modalService.dismissAll(); 
+  }
 
 }

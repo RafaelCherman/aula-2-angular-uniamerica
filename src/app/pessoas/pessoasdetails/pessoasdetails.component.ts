@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pessoa } from '../pessoa';
 
@@ -7,15 +7,25 @@ import { Pessoa } from '../pessoa';
   templateUrl: './pessoasdetails.component.html',
   styleUrls: ['./pessoasdetails.component.scss']
 })
-export class PessoasdetailsComponent {
+export class PessoasdetailsComponent implements OnInit{
 
   roteador = inject(ActivatedRoute);
-  editar!: boolean;
   pessoa: Pessoa = new Pessoa();
 
+  @Output() retorno = new EventEmitter<Pessoa>();
+  
+  @Input() editar: boolean = false;
+  @Input() pessoaRecibida!: Pessoa;
+
+  ngOnInit(): void {
+    
+      this.pessoa = this.pessoaRecibida;
+    
+  }
 
   constructor(){
-    let id = this.roteador.snapshot.paramMap.get('id');
+    
+    /*let id = this.roteador.snapshot.paramMap.get('id');
     if(id != null)
     {
       this.editar = true;
@@ -25,7 +35,15 @@ export class PessoasdetailsComponent {
     else
     {
       this.editar = false;
-    }
+    }*/
   }
+
+  enviar()
+  {
+    this.retorno.emit(this.pessoa);
+  }
+
+  
+
 
 }

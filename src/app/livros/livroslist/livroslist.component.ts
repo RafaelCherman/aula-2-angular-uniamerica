@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Livro } from '../livro';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-livroslist',
@@ -8,7 +9,11 @@ import { Livro } from '../livro';
 })
 export class LivroslistComponent {
 
-    lista: Livro[] = []
+    lista: Livro[] = [];
+    index: number = -1;
+  editar: boolean = false; 
+  modalService = inject(NgbModal);
+  livroEnviar!: Livro;
 
     constructor(){
       this.lista.push(new Livro("Autor1", "Titulo1"));
@@ -23,4 +28,35 @@ export class LivroslistComponent {
       this.lista.push(new Livro("Autor10", "Titulo10"));
 
     }
+
+    abrirModal(content: any, i: number)
+  {
+    this.index = -1;
+    this.livroEnviar = new Livro("","");
+    if(i < 0)
+    {
+      this.editar = false;
+    }
+    else
+    {
+      this.editar = true;
+      this.index = i;
+      this.livroEnviar = this.lista[i];
+    }
+    this.modalService.open(content, {size: 'lg'});
+  }
+
+  alteraLista(livro: Livro)
+  {
+    if(this.index < 1)
+    {
+      this.lista.push(livro);
+    }
+    else
+    {
+      this.lista[this.index] = livro;
+    }
+    this.modalService.dismissAll(); 
+  }
+
 }
